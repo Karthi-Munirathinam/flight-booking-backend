@@ -6,6 +6,9 @@ const register = require('./Modules/Register');
 const resendverification = require('./Modules/ResendVerification');
 const verifyemail = require('./Modules/VerifyEmail');
 const login = require('./Modules/Login');
+const forgotpassword = require('./Modules/ForgotPassword')
+const resetpassword = require('./Modules/ResetPassword')
+const changepassword = require('./Modules/ChangePassword')
 
 dotenv.config();
 app.use(express.json());
@@ -25,6 +28,12 @@ app.post('/verifyemail', verifyemail)
 
 //Login
 app.post('/login', login)
+//Forgotpassword
+app.post('/forgotpassword', forgotpassword);
+//reset password
+app.post('/resetpassword', resetpassword)
+//Change password
+app.post('/changepassword', changepassword)
 
 
 
