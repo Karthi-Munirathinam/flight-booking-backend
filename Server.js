@@ -5,6 +5,7 @@ const app = express();
 const register = require('./Modules/Register');
 const resendverification = require('./Modules/ResendVerification');
 const verifyemail = require('./Modules/VerifyEmail');
+const login = require('./Modules/Login');
 
 dotenv.config();
 app.use(express.json());
@@ -21,6 +22,9 @@ app.post('/register', register)
 app.post('/verifyaccount', resendverification)
 //Email verification for account activation
 app.post('/verifyemail', verifyemail)
+
+//Login
+app.post('/login', login)
 
 
 

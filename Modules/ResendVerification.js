@@ -17,9 +17,6 @@ const resendverification = async (req, res) => {
         let user = await db.collection('users').find({ email: req.body.email }).toArray();
         console.log(user)
         if (user && user[0].active === false) {
-            //Select the collection and perform operation
-            // const salt = bcrypt.genSaltSync(10);
-            // const hashedpassword = bcrypt.hashSync(req.body.password, salt);
             //generate random string
             let randomString = randomstring.generate();
             //store random string
