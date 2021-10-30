@@ -9,6 +9,8 @@ const login = require('./Modules/Login');
 const forgotpassword = require('./Modules/ForgotPassword')
 const resetpassword = require('./Modules/ResetPassword')
 const changepassword = require('./Modules/ChangePassword')
+const airports = require('./Modules/Airports')
+const getflights = require('./Modules/GetFlights');
 
 dotenv.config();
 app.use(express.json());
@@ -34,6 +36,11 @@ app.post('/forgotpassword', forgotpassword);
 app.post('/resetpassword', resetpassword)
 //Change password
 app.post('/changepassword', changepassword)
+
+//Get all available airports
+app.get('/airports', airports);
+//Get all flights for given FROM and TO
+app.post('/flights', getflights);
 
 
 
