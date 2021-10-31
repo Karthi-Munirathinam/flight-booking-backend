@@ -5,19 +5,18 @@ dotenv.config();
 const mongoClient = mongodb.MongoClient;
 const MONGO_URL = process.env.MONGO_URL;
 
-const getflights = async (req, res) => {
+const getbookings = async (req, res) => {
     try {
         //Initiate connection
         let client = await mongoClient.connect(MONGO_URL);
         //Select db
         let db = client.db("BookMyTrip");
-        //get all airports
-        // db.flights.aggregate([{$match:{from:"MAA"}},{$unwind:'$destination'},{$match:{'destination.to':'BLR'}}]).pretty(){ from: req.body.from, "destination.to": req.body.to }
-        let flightDetails = await db.collection('flights').aggregate([{ $match: { from: req.body.from } }, { $unwind: '$destination' }, { $match: { 'destination.to': req.body.to } }]).toArray();
+        //get the user profile
+        let getbookings = await db.collection('users').find({ _id: mongodb.ObjectId(req.body.userid) }).toArray()
         //CLose the connection
         await client.close();
         res.json({
-            flightdetails: flightDetails
+            bookingsdetail: getbookings
         })
     } catch (error) {
         res.status(500).json({
@@ -26,4 +25,4 @@ const getflights = async (req, res) => {
     }
 }
 
-module.exports = getflights
+module.exports = getbookings

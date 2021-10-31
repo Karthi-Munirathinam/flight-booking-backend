@@ -11,9 +11,8 @@ const getflights = async (req, res) => {
         let client = await mongoClient.connect(MONGO_URL);
         //Select db
         let db = client.db("BookMyTrip");
-        //get all airports
-        // db.flights.aggregate([{$match:{from:"MAA"}},{$unwind:'$destination'},{$match:{'destination.to':'BLR'}}]).pretty(){ from: req.body.from, "destination.to": req.body.to }
-        let flightDetails = await db.collection('flights').aggregate([{ $match: { from: req.body.from } }, { $unwind: '$destination' }, { $match: { 'destination.to': req.body.to } }]).toArray();
+        //get the flight details thru flight no
+        let flightDetails = await db.collection('flightdetails').find({ flightno: req.body.flightno }).toArray();
         //CLose the connection
         await client.close();
         res.json({

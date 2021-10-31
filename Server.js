@@ -11,6 +11,12 @@ const resetpassword = require('./Modules/ResetPassword')
 const changepassword = require('./Modules/ChangePassword')
 const airports = require('./Modules/Airports')
 const getflights = require('./Modules/GetFlights');
+const flightdetails = require('./Modules/FlightDetails');
+const bookingdetails = require('./Modules/BookingDetails');
+const bookticket = require('./Modules/BookTicket');
+const authenticate = require('./Modules/Authenticate')
+const sendticket = require('./Modules/SendTicket');
+const getbookings = require('./Modules/GetBookings')
 
 dotenv.config();
 app.use(express.json());
@@ -41,7 +47,16 @@ app.post('/changepassword', changepassword)
 app.get('/airports', airports);
 //Get all flights for given FROM and TO
 app.post('/flights', getflights);
-
+//Get flight details for given flight number
+app.post('/flightdetails', flightdetails);
+//Update booking details for given user
+app.post('/bookingdetails', authenticate, bookingdetails);
+//Update book ticket for given user
+app.post('/bookticket', authenticate, bookticket);
+//Send booked ticket to user
+app.post('/sendticket', authenticate, sendticket);
+//get bookings of a  user
+app.get('/getbookings', authenticate, getbookings);
 
 
 
